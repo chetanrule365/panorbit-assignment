@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import ChatIcon from "../Icons/Chat";
-import ChevronDownIcon from "../Icons/ChevronDown";
-import ChevronUpIcon from "../Icons/ChevronUp";
-import SideBarIcon from "../Icons/SideBar";
-import ChevronRight from "../Icons/ChevronRight";
+import ChatIcon from "../assets/Chat";
+import ChevronDownIcon from "../assets/ChevronDown";
+import ChevronUpIcon from "../assets/ChevronUp";
+import SideBarIcon from "../assets/SideBar";
+import ChevronRight from "../assets/ChevronRight";
 
 function Sidebar() {
   const menuItems = [
@@ -32,7 +32,7 @@ function Sidebar() {
   const { pathname } = location;
 
   return (
-    <div className="w-[70%] h-full max-w-[280px] bg-primary rounded-3xl flex flex-col items-center justify-center">
+    <div className="w-[70%] h-full max-w-[280px] bg-gradient-to-b from-primary to-secondary rounded-3xl flex flex-col items-center justify-center">
       <div className="w-full flex relative">
         <div className="w-full pl-8 pr-2">
           {menuItems?.map(({ text, path }) => (

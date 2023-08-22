@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { users, user as currentUser } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import WaveSVG from "../assets/Wave";
 
 function LandingPage() {
   const dispatch = useDispatch();
@@ -21,12 +22,19 @@ function LandingPage() {
   }, []);
 
   return (
-    <div className="flex justify-center items-center h-screen p-4">
+    <div className="flex justify-center items-center h-screen p-4 relative">
+      <div className="absolute top-0 z-[-1] w-full">
+        <WaveSVG />
+      </div>
+      <div className="absolute top-5 opacity-30 z-[-1] w-full">
+        <WaveSVG />
+      </div>
+
       <div className="shadow-md rounded-2xl w-full max-w-[560px] overflow-clip">
         <h2 className="bg-slate-100 p-8 text-center text-2xl font-bold text-gray-600">
           Select an account
         </h2>
-        <div className="h-[50vh] overflow-y-scroll px-9">
+        <div className="h-[50vh] overflow-y-scroll px-9 bg-white">
           {(usersStoreData || [])?.map((user) => {
             const { id, profilepicture, name: userName } = user;
             return (
