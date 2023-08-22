@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import Layout from "../components/Layout";
 import { useSelector } from "react-redux";
 import { Wrapper } from "@googlemaps/react-wrapper";
+import { useNavigate } from "react-router-dom";
 
 function MyMapComponent({ center, zoom }) {
   const ref = useRef();
@@ -17,7 +18,8 @@ function MyMapComponent({ center, zoom }) {
 }
 
 function ProfilePage() {
-  const user = useSelector((state) => state.users.currentUser);
+  const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.users.currentUser);
   const {
     name,
     username,
@@ -27,7 +29,7 @@ function ProfilePage() {
     website,
     company,
     address,
-  } = user || {};
+  } = currentUser || {};
   const { name: companyName, catchPhrase, bs } = company || {};
   const {
     street,
@@ -36,12 +38,15 @@ function ProfilePage() {
     zipcode,
     geo: { lat, lng } = {},
   } = address || {};
-  console.log(lat, lng);
 
   const rowStyles = "h-10";
   const keyStyles = "text-end text-xl text-gray-400 w-[108px]";
   const middleStyles = "text-xl text-gray-400 px-3";
   const valueStyles = "text-xl text-gray-600 font-semibold w-[240px]";
+
+  useEffect(() => {
+    if (!currentUser) navigate("/landing", { replace: true });
+  }, [currentUser]);
 
   return (
     <Layout>
@@ -133,7 +138,9 @@ function ProfilePage() {
           </Wrapper>
           <p className="text-gray-600 font-semibold text-end mt-2">
             <span className="text-gray-400 font-normal">Lat:</span> {lat}
-            <span className="text-gray-400 font-normal">&nbsp;&nbsp;&nbsp;&nbsp;Long:</span>
+            <span className="text-gray-400 font-normal">
+              &nbsp;&nbsp;&nbsp;&nbsp;Long:
+            </span>
             {lng}
           </p>
         </div>

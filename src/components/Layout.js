@@ -35,7 +35,7 @@ function Sidebar() {
     <div className="w-[70%] h-full max-w-[280px] bg-primary rounded-3xl flex flex-col items-center justify-center">
       <div className="w-full flex relative">
         <div className="w-full pl-8 pr-2">
-          {menuItems.map(({ text, path }) => (
+          {menuItems?.map(({ text, path }) => (
             <div
               key={text}
               className="border-b-[1px] last-of-type:border-none border-white border-opacity-50 py-4"
@@ -96,7 +96,7 @@ function ChatBox() {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const filteredUsers = usersList.filter((user) => user.id !== currentUser.id);
+  const filteredUsers = usersList?.filter((user) => user.id !== currentUser.id);
 
   return (
     <div className="fixed bottom-0 right-24">
@@ -116,7 +116,7 @@ function ChatBox() {
           { "h-0": !isOpen, "h-[300px]": isOpen }
         )}
       >
-        {filteredUsers.map(({ id, name, profilepicture }) => (
+        {filteredUsers?.map(({ id, name, profilepicture }) => (
           <div
             key={id}
             className="px-4 py-1 flex items-center justify-between gap-6 cursor-pointer"
