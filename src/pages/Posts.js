@@ -4,7 +4,7 @@ import ComingSoon from '../components/ComingSoon'
 
 function Posts() {
   return (
-    <Layout>
+    <Layout title='Posts'>
       <ComingSoon />
     </Layout>
   )

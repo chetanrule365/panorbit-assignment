@@ -4,7 +4,7 @@ import ComingSoon from "../components/ComingSoon";
 
 function Gallery() {
   return (
-    <Layout>
+    <Layout title="Gallery">
       <ComingSoon />
     </Layout>
   );

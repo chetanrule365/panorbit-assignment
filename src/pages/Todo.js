@@ -4,7 +4,7 @@ import ComingSoon from "../components/ComingSoon";
 
 function Todo() {
   return (
-    <Layout>
+    <Layout title="ToDo">
       <ComingSoon />
     </Layout>
   );

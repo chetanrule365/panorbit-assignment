@@ -71,7 +71,7 @@ function Sidebar() {
   );
 }
 
-function Header({ title = "Profile" }) {
+function Header({ title }) {
   const user = useSelector((state) => state.users.currentUser);
   const { name, profilepicture } = user || {};
 
@@ -137,12 +137,12 @@ function ChatBox() {
   );
 }
 
-function Layout({ children }) {
+function Layout({ title = 'Profile', children }) {
   return (
     <div className="p-8 min-w-[1440px] m-auto h-screen flex gap-4 overflow-hidden">
       <Sidebar />
       <div className="px-8 py-4 w-full">
-        <Header />
+        <Header title={title} />
         {children}
         <ChatBox />
       </div>
