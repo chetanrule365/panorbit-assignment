@@ -72,19 +72,60 @@ function Sidebar() {
 }
 
 function Header({ title }) {
-  const user = useSelector((state) => state.users.currentUser);
-  const { name, profilepicture } = user || {};
+  const usersList = useSelector((state) => state.users.list);
+  const currentUser = useSelector((state) => state.users.currentUser);
+  const navigate = useNavigate();
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const { name, profilepicture, email } = currentUser || {};
+  const filteredUsers = usersList?.filter((user) => user.id !== currentUser.id);
 
   return (
     <div className="border-b-[1px] border-gray-300 w-full pb-6 flex justify-between items-center">
       <h2 className="font-semibold text-2xl text-gray-600">{title}</h2>
-      <div className="flex items-center gap-3">
-        <img
-          src={profilepicture}
-          alt="profile"
-          className="w-9 h-9 object-cover rounded-full"
-        />
-        <p className="text-gray-600 text-lg">{name}</p>
+      <div className="relative">
+        <div
+          className="flex items-center gap-3 cursor-pointer"
+          onClick={() => setIsOpen((state) => !state)}
+        >
+          <img
+            src={profilepicture}
+            alt="profile"
+            className="w-9 h-9 object-cover rounded-full"
+          />
+          <p className="text-gray-600 text-lg">{name}</p>
+        </div>
+        {isOpen && (
+          <div className="absolute right-0 z-10 bg-white shadow-2xl p-10 rounded-2xl w-[300px] flex flex-col items-center">
+            <img
+              src={profilepicture}
+              alt="profile"
+              className="w-24 h-24 object-cover rounded-full"
+            />
+            <p className="text-gray-600 text-lg mt-2">{name}</p>
+            <p className="text-gray-400 mb-3">{email}</p>
+            {filteredUsers?.slice(0, 2)?.map(({ profilepicture, name }) => (
+              <>
+                <hr className="border-1 border-gray-300 w-full" />
+                <div className="flex items-center gap-2 py-2 cursor-pointer">
+                  <img
+                    src={profilepicture}
+                    alt="profile"
+                    className="w-9 h-9 object-cover rounded-full"
+                  />
+                  <p className="text-gray-600 text-lg">{name}</p>
+                </div>
+              </>
+            ))}
+            <button
+              className="bg-rose-500 px-4 py-1 text-white text-lg rounded-2xl mt-4"
+              onClick={() => navigate("/landing", { replace: true })}
+            >
+              Sign out
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -137,7 +178,7 @@ function ChatBox() {
   );
 }
 
-function Layout({ title = 'Profile', children }) {
+function Layout({ title = "Profile", children }) {
   return (
     <div className="p-8 min-w-[1440px] m-auto h-screen flex gap-4 overflow-hidden">
       <Sidebar />
